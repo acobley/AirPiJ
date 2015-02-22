@@ -14,38 +14,17 @@ import java.util.Random;
 public class Sensor {
 
     int type = 0;
-    boolean addAccuracy = false;
-    int iMin = 0;
-    int iMax = 100;
-    float fMin = (float) 0.0;
-    float fMax = (float) 100.0;
-    Random randomno = new Random();
+
+
     String name;
-    String sValues[][]={{"High","Low"},{"Ok","Warning","Danger"},
-        {"Slow","OK","Fast"},{"Slip","Spill","Misaligned"}
-    };
+float fValue;
+int iValue;
+        String sValue;
     int sValueType;
     public Sensor() {
         //See http://www.tutorialspoint.com/java/util/random_nextboolean.htm
 
-        type = randomno.nextInt(3) + 1;
-        addAccuracy = randomno.nextBoolean();
-        switch (type) {
-            case 1:
-                fMin = (float) randomno.nextInt(50);
-                fMax = (float) randomno.nextInt(1000) + fMin;
-                break;
-            case 2:
-                iMin = randomno.nextInt(50);
-                iMax = randomno.nextInt(1000) + iMin;
-                break;
-            case 3:
-                int iL=sValues.length;
-                sValueType=randomno.nextInt(iL);
-                break;
-            default:
-                break;
-        }
+        
     }
 
     
@@ -55,26 +34,41 @@ public class Sensor {
     public int getType() {
         return type;
     }
+     
 
+    
     public Object getValue() {
         switch (type) {
             case 1:
-                float fvalue = fMin + (float) randomno.nextInt((int) fMax);
-                Float fValue = new Float(fvalue);
+               
                 return fValue;
 
             case 2:
-                int ivalue = iMin + randomno.nextInt(iMax);
-                Integer iValue = new Integer(ivalue);
+              
                 return iValue;
             case 3:
-                int iL= sValues[sValueType].length;
-                int riL=randomno.nextInt(iL);
-                return sValues[sValueType][riL];
+                
+                return sValue;
             default:
                 break;
         }
         return null;
+    }
+    
+    public void setValue(Object Value){
+        Class cl = Value.getClass();
+         String className = cl.getName();
+         if (className.compareTo("Float")==0){
+             Float f= (Float)Value;
+             fValue=f.floatValue();
+         }
+         if (className.compareTo("Integer")==0){
+             Integer i= (Integer)Value;
+             iValue=i.intValue();
+         }
+         if (className.compareTo("String")==0){
+             sValue=(String)Value;
+         }
     }
     
     public String getName(){

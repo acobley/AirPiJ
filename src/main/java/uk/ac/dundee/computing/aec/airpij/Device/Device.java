@@ -49,7 +49,7 @@ public class Device {
     }
     
     public Sensor[] getSensors(){
-        return sensors.toArray(a)
+        return sensors.toArray(new Sensor[sensors.size()]);
     }
     
     public Map<String,String> getMeta(){
