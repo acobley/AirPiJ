@@ -21,7 +21,7 @@ public class AirPiJ {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
-            I2CBus bus = I2CFactory.getInstance(1);
+            I2CBus bus = I2CFactory.getInstance(0);
             I2CDevice adxlDevice = bus.getDevice(0x53);
 
             adxlDevice.write(0x31, (byte) 0x0b); // Initialize
