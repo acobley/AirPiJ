@@ -20,10 +20,15 @@ public class AirPiJ {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        I2CBus bus=null;
+        I2CDevice adxlDevice =null;
         try {
-            I2CBus bus = I2CFactory.getInstance(0);
-            I2CDevice adxlDevice = bus.getDevice(0x53);
-
+             bus= I2CFactory.getInstance(0);
+            adxlDevice = bus.getDevice(0x53);
+        }catch(Exception et){
+            System.out.println("Can't open bus or device");
+        }
+        try{
             adxlDevice.write(0x31, (byte) 0x0b); // Initialize
             long now = System.currentTimeMillis();
             int measurement = 0;
@@ -55,7 +60,7 @@ public class AirPiJ {
                 measurement++;
             }
         } catch (Exception et) {
-            System.out.println("Can't get bus " + et);
+            System.out.println("Can't get data" + et);
         }
     }
 
