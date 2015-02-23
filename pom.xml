@@ -5,11 +5,17 @@
     <artifactId>AirPiJ</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <dependencies>
+      <dependencies>
         <dependency>
-            <groupId>com.pi4j</groupId>
-            <artifactId>pi4j-core</artifactId>
-            <version>0.0.5</version>
+          <groupId>com.pi4j</groupId>
+          <artifactId>pi4j-core</artifactId>
+          <version>0.0.5</version>
+          <exclusions>
+            <exclusion>
+              <groupId>com.pi4j</groupId>
+              <artifactId>pi4j-native</artifactId>
+            </exclusion>
+          </exclusions>
         </dependency>
     </dependencies>
     <properties>
